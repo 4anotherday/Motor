@@ -1,6 +1,6 @@
 #include "Camera.h"
-Camera::Camera(Ogre::SceneManager* scn, int cameraNum) :_camera(new Ogre::Camera("camera" + cameraNum, scn)), _node(nullptr),
-_viewport(nullptr)
+Camera::Camera(Ogre::SceneManager* scn, int cameraNum) :_camera(new Ogre::Camera("camera" + cameraNum, scn)),_node(nullptr),
+	_viewport(nullptr)
 {
 	//CHANGE: si tenemos algo que gestione la escena llamarlo para que sea hijo de otro nodo
 	_node = scn->createSceneNode();
@@ -43,7 +43,7 @@ void Camera::setOrthoWindowDimensions(float w, float h)
 {
 	if (_camera->getProjectionType() == Ogre::PT_ORTHOGRAPHIC)
 		_camera->setOrthoWindow(w, h);
-
+	
 }
 
 void Camera::setViewportDimensions(float left, float top, float w, float h)
@@ -54,10 +54,8 @@ void Camera::setViewportDimensions(float left, float top, float w, float h)
 
 void Camera::setCamera(Ogre::Camera* cam)
 {
-	//errors check
 	if (cam == nullptr)
 		throw "Null camera";
-	//this is to prevent memory leaks
 	if (_camera != nullptr)
 	{
 		delete _camera;
@@ -69,10 +67,8 @@ void Camera::setCamera(Ogre::Camera* cam)
 
 void Camera::setNode(Ogre::SceneNode* node)
 {
-	//errors check
 	if (node == nullptr)
 		throw "null node";
-	//this is to prevent memory leaks
 	if (_node != nullptr) {
 		_node->detachObject(_camera);
 		delete _node;
