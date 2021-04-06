@@ -13,7 +13,7 @@ public:
 	/// </summary>
 	/// <param name="scn">The SceneManager</param>
 	/// <param name="cameraNum">An identifier in case the user wants to create multiple cameras</param>
-	Camera(Ogre::SceneManager* scn, int cameraNum = 0);
+	Camera(Ogre::SceneManager* scn, Ogre::RenderWindow* rWin, int cameraNum = 0);
 	~Camera();
 
 	/// <summary>
@@ -71,9 +71,15 @@ public:
 	/// <param name="node">The new Ogre scene node</param>
 	void setNode(Ogre::SceneNode* node);
 
+	/// <summary>
+	/// Sets the ogre render window
+	/// </summary>
+	/// <param name="render window">The new RenderWindow</param>
+	void setReenderWindow(Ogre::RenderWindow* renderWin);
 
 private:
 	Ogre::Camera* _camera;
+	Ogre::RenderWindow* _renderWindow;
 	Ogre::Viewport* _viewport;
 	Ogre::SceneNode* _node;
 };
