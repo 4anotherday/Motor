@@ -100,11 +100,13 @@ material Practica1/Orange{
 material Practica1/Metal{
 	technique{
 		pass{
-			diffuse 1.0 1.0 1.0
+			lighting on
+			ambient  1 1 1
+			diffuse  1 1 1
 			texture_unit{
 				texture metal.jpg
 				colour_op modulate
-			}
+			}   
 		}
 	}
 }

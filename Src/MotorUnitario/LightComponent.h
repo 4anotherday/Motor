@@ -21,6 +21,10 @@ public:
 	/// </summary>
 	virtual void awake(luabridge::LuaRef& data) override;
 
+	void start() override;
+
+	void update() override;
+
 	/// <summary>
 	/// Changes light type to given type
 	/// </summary>
@@ -176,6 +180,7 @@ private:
 	/// </summary>
 	void onDisable() override;
 
+	Transform* _tr;
 	Light* _light;
 };
 

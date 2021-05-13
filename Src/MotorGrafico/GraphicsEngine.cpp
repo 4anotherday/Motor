@@ -11,6 +11,8 @@
 
 #include "OgreShaderGenerator.h"
 #include "RTSSDefaultTechniqueListener.h"
+#include "OgreRTShaderSystem.h"
+#include "OgreShaderExPerPixelLighting.h"
 
 #include "Camera.h"
 #include <OgreEntity.h>
@@ -127,6 +129,9 @@ void GraphicsEngine::setup()
 	_defaultViewport->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
 	_defaultViewport->setDimensions(0, 0, 0, 0);
 	_defaultViewport->setBackgroundColour(Ogre::ColourValue::Blue);
+
+	//_sceneManager->setShadowTechnique(Ogre::ShadowTechnique::SHADOWTYPE_TEXTURE_MODULATIVE);
+	//_sceneManager->setShadowColour(Ogre::ColourValue(0.0, 0.0, 0.0));
 }
 
 void GraphicsEngine::shutdown()
@@ -258,8 +263,8 @@ bool GraphicsEngine::_initialiseRTShaderSystem()
 		pMainRenderState->reset();
 
 		//added
-		_mTechniqueListener = new RTSSDefaultTechniqueListener(_mShaderGenerator);
-		Ogre::MaterialManager::getSingleton().addListener(_mTechniqueListener);
+		/*_mTechniqueListener = new RTSSDefaultTechniqueListener(_mShaderGenerator);
+		Ogre::MaterialManager::getSingleton().addListener(_mTechniqueListener);*/
 		//Ogre::MaterialManager::getSingleton().
 
 		return true;
@@ -317,6 +322,8 @@ Ogre::Viewport* GraphicsEngine::setupViewport(Ogre::Camera* cam, int zOrder, flo
 {
 	Ogre::Viewport* vp = _window->addViewport(cam, zOrder, x, y, w, h);
 	vp->setMaterialScheme(Ogre::RTShader::ShaderGenerator::DEFAULT_SCHEME_NAME);
+	_mTechniqueListener = new RTSSDefaultTechniqueListener(_mShaderGenerator);
+	Ogre::MaterialManager::getSingleton().addListener(_mTechniqueListener);
 	vp->setClearEveryFrame(true, Ogre::FBT_DEPTH);
 	return vp;
 }

@@ -20,6 +20,7 @@ Light::Light(const std::string& gameObjectName) : _id(_lightCount++), _light(nul
 	_light = sm->createLight(gameObjectName + std::string("_lightObject_") + std::to_string(_id));
 	_light->setType(Ogre::Light::LightTypes::LT_POINT);
 
+
 	//Attach the light object to the sceneNode somewhere
 	//Re-launch of our own exception instead of Ogre's exception
 	try {
@@ -146,4 +147,9 @@ const bool Light::getVisible() const
 void Light::setDirection(float x, float y, float z)
 {
 	_lightNode->setDirection(Ogre::Vector3(x, y, z));
+}
+
+void Light::updatePosition(float x, float y, float z)
+{
+	_lightNode->setPosition(Ogre::Vector3(x, y, z));
 }

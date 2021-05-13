@@ -171,6 +171,11 @@ public:
 	void setDirection(float x, float y, float z);
 
 	/// <summary>
+	/// Updates position of the lightNode
+	/// </summary>
+	void updatePosition(float x, float y, float z);
+
+	/// <summary>
 	/// Static count of lights, used so each Light has a unique name
 	/// </summary>
 	static unsigned int _lightCount;

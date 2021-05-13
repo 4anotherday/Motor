@@ -2,8 +2,9 @@
 #include "ComponentIDs.h"
 #include "GameObject.h"
 #include "includeLUA.h"
+#include "Transform.h"
 
-LightComponent::LightComponent() :Component(ComponentId::LightComponent), _light(nullptr)
+LightComponent::LightComponent() :Component(ComponentId::LightComponent), _tr(nullptr), _light(nullptr)
 {
 }
 
@@ -28,20 +29,31 @@ void LightComponent::awake(luabridge::LuaRef& data)
 	if (LUAFIELDEXIST(Specular))
 		_light->setSpecular(data["Specular"]["Red"].cast<float>(), data["Specular"]["Green"].cast<float>(), data["Specular"]["Blue"].cast<float>());
 
-	if (LUAFIELDEXIST(Attenuation))
+	if (_light->getLightType() != Light::LightType::DIRECTIONAL && LUAFIELDEXIST(Attenuation))
 		_light->setAttenuation(data["Attenuation"]["Range"].cast<float>(), data["Attenuation"]["Constant"].cast<float>(),
 			data["Attenuation"]["Linear"].cast<float>(), data["Attenuation"]["Quadratic"].cast<float>());
 
-	if (LUAFIELDEXIST(SpotLightRange))
+	if (_light->getLightType() == Light::LightType::SPOTLIGHT && LUAFIELDEXIST(SpotLightRange))
 		_light->setSpotlightRange(data["SpotLightRange"]["InnerAngle"].cast<float>(), data["SpotLightRange"]["OuterAngle"].cast<float>(),
 			data["SpotLightRange"]["FallOf"].cast<float>());
 
-	if (LUAFIELDEXIST(LightDirection))
+	if (_light->getLightType() != Light::LightType::POINT && LUAFIELDEXIST(LightDirection))
 		_light->setDirection(data["LightDirection"]["X"].cast<float>(), data["LightDirection"]["Y"].cast<float>(), data["LightDirection"]["Z"].cast<float>());
 
 	if (LUAFIELDEXIST(Intensity))	
 		_light->setPowerScale(data["Intensity"].cast<float>());
 	
+}
+
+void LightComponent::start()
+{
+	_tr = GETCOMPONENT(Transform, ComponentId::Transform);
+}
+
+void LightComponent::update()
+{
+	const Vector3& pos = _tr->getPosition();
+	_light->updatePosition(pos.getX(), pos.getY(), pos.getZ());
 }
 
 const Light::LightType LightComponent::convertLightType(std::string type)

@@ -33,11 +33,13 @@ void RenderObjectComponent::awake(luabridge::LuaRef& data)
 	if (LUAFIELDEXIST(Material))
 		setMaterial(GETLUASTRINGFIELD(Material));
 	else throw "Material doesn't exists\n ";
+
 	if (LUAFIELDEXIST(Visible))
 		setVisible(GETLUAFIELD(Visible, bool));
 
 	if (LUAFIELDEXIST(Shadows))
 		setCastShadows(GETLUAFIELD(Shadows, bool));
+
 	float renderDist = 999;
 	if (LUAFIELDEXIST(RenderingDistance))
 		setRenderingDistance(GETLUAFIELD(RenderingDistance, float));

@@ -12,38 +12,49 @@
 
 -- You can find component definition examples at the end of this document
 
-HowManyGameObjects = 4
-
-go_3 = {}
-go_3[0] = { Name = "Suelo", HowManyCmps = 3, Persist = false}
-go_3[1] = { Component = "Transform", Coord = {X = 0, Y = 0, Z = 0}, Rotation={X=0, Y=0, Z=40}, Scale = { X=1, Y=1, Z=1}}
-go_3[2] = {	Component = "RenderObject", MeshName="cube.mesh", Material="Practica1/Yellow",
-  			Visible=true, Shadows=true, RenderingDistance = 1000}
-go_3[3] = { Component = "BoxCollider"}
+HowManyGameObjects = 5
 
 go_0 = {}
-go_0[0] = { Name = "Objeto", HowManyCmps = 3, Persist = false}
-go_0[1] = { Component = "Transform", Coord = {X = 0, Y = 3, Z = 0}, Rotation={X=0, Y=0, Z=0}, Scale = {X=1, Y=1, Z=1}}
-go_0[2] = {	Component = "RenderObject", MeshName="uv_sphere.mesh", Material="Practica1/Yellow",
- 			Visible=true, Shadows=true, RenderingDistance = 1000}
-go_0[3] = { Component = "RigidBody", Static = false, Type = "Sphere", Diameter = 1, Kinematic = false, Mass = 1}
-
-go_1 = {}
-go_1[0] = { Name = "Camara", HowManyCmps = 2, Persist = false}
-go_1[1] = { Component = "Transform", Coord = {X = 0, Y = 1, Z = -8}, Rotation={X=0, Y=180, Z=0}}
-go_1[2] = { Component = "Camera", SlaveRotation = false, Plane = {Near = 1, Far = 9999},
+go_0[0] = { Name = "Camara", HowManyCmps = 2, Persist = false}
+go_0[1] = { Component = "Transform", Coord = {X = 0, Y = 2, Z = -8}, Rotation={X=0, Y=180, Z=0}}
+go_0[2] = { Component = "Camera", SlaveRotation = false, Plane = {Near = 1, Far = 9999},
 			Projection = true, Fovy = 60, Frustrum = {Left = 1, Right = 1, Top = 1, Bot = 1}, 
 			OrthoWindow = {W = 100, H = 100}, Viewport = {Left = 0, Top = 0, W = 1, H = 1},
 			DisplayOverlays= true, zOrder = 1, Compositors = { "JugadorVisionWeak", false, "JugadorVisionStrong", false }}
 			
+go_1 = {}
+go_1[0] = { Name = "Luz", HowManyCmps = 2, Persist = false}
+go_1[1] = { Component = "Transform", Coord = {X = 4, Y = 4, Z = 0}}
+go_1[2] = { Component = "LightComponent", LightType= "SPOTLIGHT", Visible = true, Intensity = 1,
+			LightDirection = {X = -2, Y = -1, Z = 0},
+			Attenuation = {Range = 100, Constant = 1, Linear = 0.045, Quadratic = 0.0075},
+			Diffuse = {Red = 1, Green= 1, Blue = 1}, 
+			Specular = {Red = 1, Green= 1, Blue = 1}}
+
 go_2 = {}
-go_2[0] = { Name = "Luz", HowManyCmps = 2, Persist = false}
-go_2[1] = { Component = "Transform", Coord = {X = 300, Y = 5, Z = -1000}}
-go_2[2] = { Component = "LightComponent", LightType= "DIRECTIONAL", Visible = true, Diffuse = {Red = 1, Green= 1, Blue = 1}, 
-			Direction = {X = 1, Y = -1, Z = 2},
-			Specular = {Red = 1, Green= 1, Blue = 1}, 
-			Attenuation = {Range = 1, Constant = 1, Linear = 1, Quadratic = 1},
-			SpotLightRange = {InnerAngle = 1, OuterAngle = 1, FallOf = 1}}
+go_2[0] = { Name = "Suelo", HowManyCmps = 2, Persist = false}
+go_2[1] = { Component = "Transform", Coord = {X = 0, Y = 0, Z = 0}, Rotation={X=0, Y=0, Z=0}, Scale = { X=10, Y=1, Z=10}}
+go_2[2] = { Component = "RenderObject", MeshName="cube.mesh", Material="Practica1/Metal",
+   			Visible=true, Shadows=true, RenderingDistance = 1000}
+-- go_2[3] = { Component = "BoxCollider"}
+
+
+go_3 = {}
+go_3[0] = { Name = "Objeto1", HowManyCmps = 2, Persist = false}
+go_3[1] = { Component = "Transform", Coord = {X = -2, Y = 2, Z = 0}, Rotation={X=0, Y=0, Z=0}, Scale = {X=1, Y=4, Z=1}}
+go_3[2] = {	Component = "RenderObject", MeshName="cube.mesh", Material="Practica1/Metal",
+			 Visible=true, Shadows=true, RenderingDistance = 1000}
+go_3[3] = { Component = "RigidBody", Static = true, Type = "Box", Kinematic = false, Mass = 1}
+
+
+go_4 = {}
+go_4[0] = { Name = "Objeto2", HowManyCmps = 1, Persist = false}
+go_4[1] = { Component = "Transform", Coord = {X = 2, Y = 2, Z = 0}, Rotation={X=0, Y=0, Z=0}, Scale = {X=1, Y=4, Z=1}}
+go_4[2] = {	Component = "RenderObject", MeshName="cube.mesh", Material="Practica1/Metal",
+			 Visible=true, Shadows=true, RenderingDistance = 1000}
+go_4[3] = { Component = "RigidBody", Static = true, Type = "Box", Kinematic = false, Mass = 1}			 
+
+
 
 
 

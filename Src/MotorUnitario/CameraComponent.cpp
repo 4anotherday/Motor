@@ -97,6 +97,26 @@ void CameraComponent::update()
 	}
 
 	Vector3 pos = _tr->getPosition();
+
+	if (KeyBoardInput::getInstance()->isKeyDown(KeyCode::KEYCODE_LEFT)) {
+		pos.setX(pos.getX() - 0.05);
+	}
+	else if (KeyBoardInput::getInstance()->isKeyDown(KeyCode::KEYCODE_RIGHT)) {
+		pos.setX(pos.getX() + 0.05);
+	}
+	if (KeyBoardInput::getInstance()->isKeyDown(KeyCode::KEYCODE_UP)) {
+		pos.setY(pos.getY() + 0.05);
+	}
+	else if (KeyBoardInput::getInstance()->isKeyDown(KeyCode::KEYCODE_DOWN)) {
+		pos.setY(pos.getY() - 0.05);
+	}
+	if (KeyBoardInput::getInstance()->isKeyDown(KeyCode::KEYCODE_E)) {
+		pos.setZ(pos.getZ() + 0.05);
+	}
+	else if (KeyBoardInput::getInstance()->isKeyDown(KeyCode::KEYCODE_Q)) {
+		pos.setZ(pos.getZ() - 0.05);
+	}
+	_tr->setPosition(pos);
 	_camera->setPosition(static_cast<float>(pos.getX()), static_cast<float>(pos.getY()), static_cast<float>(pos.getZ()));
 
 	if (_slaveRotation) {
